@@ -43,8 +43,8 @@ function Illustration() {
   )
 }
 
-// ⚠️ ЗАМЕНИ на ссылку своего сообщества ВКонтакте (напр. https://vk.com/istoriya_history)
-const CHANNEL_INVITE = 'https://vk.com/'
+// Сообщество ВКонтакте проекта «История на пальцах»
+const CHANNEL_INVITE = 'https://vk.ru/club239810453'
 
 // Логотип канала: пробуем logo.png → logo.webp → logo.jpg, иначе рисованная эмблема.
 const LOGO_CANDIDATES = ['logo.png', 'logo.webp', 'logo.jpg']
