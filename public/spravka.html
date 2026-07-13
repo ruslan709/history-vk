@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#182848" />
+<title>Справка — История на пальцах</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F8F6F2; --paper-2:#F1ECE2; --ink:#182848; --ink-2:#233a63;
+    --gold:#C9A15A; --gold-light:#E7CE9B; --burgundy:#7C2540; --burgundy-light:#9c3a56;
+    --text:#2A2620; --muted:#7C7266; --card:#FFFFFF; --line:rgba(24,40,72,0.10);
+    --shadow:0 10px 30px rgba(24,40,72,0.10);
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:radial-gradient(1000px 500px at 90% -10%, rgba(201,161,90,0.12), transparent 60%), var(--paper);
+    color:var(--text); font-family:'Manrope',sans-serif; -webkit-font-smoothing:antialiased; line-height:1.55; }
+  .wrap{ max-width:760px; margin:0 auto; padding:28px 18px 70px; }
+  h1,h2,h3{ font-family:'PT Serif',serif; }
+  a{ color:var(--burgundy); }
+
+  .hero{ background:linear-gradient(125deg,#1e2f52,var(--ink-2) 45%,var(--burgundy) 130%); color:#fff;
+    border-radius:24px; padding:30px 26px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .hero::after{ content:""; position:absolute; right:-50px; top:-50px; width:200px; height:200px; border-radius:50%;
+    background:radial-gradient(circle,rgba(201,161,90,0.35),transparent 65%); }
+  .hero .eyebrow{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-light); font-weight:800; }
+  .hero h1{ margin:8px 0 8px; font-size:26px; line-height:1.15; }
+  .hero p{ margin:0; color:rgba(255,255,255,0.85); font-size:15px; }
+
+  .toc{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px 18px; box-shadow:var(--shadow); margin-top:18px; }
+  .toc-title{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:10px; }
+  .toc a{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font-weight:600; font-size:15px;
+    padding:9px 10px; border-radius:10px; }
+  .toc a:hover{ background:var(--paper-2); }
+  .toc a .e{ font-size:18px; }
+
+  .sec{ background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 20px; box-shadow:var(--shadow); margin-top:18px; scroll-margin-top:14px; }
+  .sec-head{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .sec-head .e{ flex-shrink:0; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:22px;
+    background:linear-gradient(150deg,var(--gold-light),var(--gold)); box-shadow:0 8px 18px rgba(201,161,90,0.28); }
+  .sec-head h2{ margin:0; font-size:19px; color:var(--ink); }
+  .sec p{ margin:0 0 10px; font-size:15px; }
+  .sec ol, .sec ul{ margin:0 0 10px; padding-left:22px; font-size:15px; }
+  .sec li{ margin:5px 0; }
+  .sec p:last-child, .sec ol:last-child, .sec ul:last-child{ margin-bottom:0; }
+
+  .mock{ background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px; margin:8px 0; }
+  .mock-input{ background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:10px 12px; font-size:13.5px; color:var(--text); margin-bottom:8px; }
+  .mock-input.hl{ border-color:var(--gold); box-shadow:0 0 0 4px rgba(201,161,90,0.16); }
+  .ph{ color:var(--muted); }
+  .btns{ display:inline-block; background:var(--paper-2); color:var(--ink-2); font-weight:800; font-size:13.5px; padding:6px 12px; border-radius:999px; }
+
+  .note{ border-radius:12px; padding:12px 14px; font-size:13.5px; margin-top:10px; line-height:1.5; }
+  .note.warn{ background:rgba(124,37,64,0.06); border:1px solid rgba(124,37,64,0.25); color:var(--burgundy); }
+  .note.ok{ background:rgba(46,125,50,0.08); border:1px solid rgba(46,125,50,0.25); color:#2e7d32; }
+  .note.info{ background:rgba(35,58,99,0.06); border:1px solid rgba(35,58,99,0.18); color:var(--ink-2); }
+  code{ background:rgba(24,40,72,0.08); padding:1px 6px; border-radius:5px; font-size:13px; word-break:break-all; }
+
+  .big-link{ display:block; text-align:center; margin-top:10px; background:linear-gradient(120deg,var(--ink),var(--ink-2)); color:#fff; text-decoration:none; font-weight:800; font-size:15px; padding:14px; border-radius:13px; }
+  .qa{ border-top:1px solid var(--line); padding:12px 0; }
+  .qa:first-child{ border-top:none; }
+  .qa b{ display:block; color:var(--ink); margin-bottom:4px; }
+  .foot{ text-align:center; color:var(--muted); font-size:13px; margin-top:26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">📚 История на пальцах · справка</div>
+    <h1>Справка и инструкции</h1>
+    <p>Всё, что нужно для работы с сайтом-навигатором. Выберите раздел ниже.</p>
+  </div>
+
+  <section class="sec" style="border-color:rgba(201,161,90,0.5);background:linear-gradient(120deg,var(--card),#fbf6ea)">
+    <div class="sec-head"><span class="e">✨</span><h2>Что изменилось (важно)</h2></div>
+    <p>Теперь к <b>одной теме</b> можно добавлять <b>несколько материалов</b> — они не создают новые строки, а раскрываются списком под темой.</p>
+    <p><b>Как добавить ещё материал к теме:</b></p>
+    <ol>
+      <li>Опубликуйте пост в ВКонтакте, скопируйте его <b>ссылку</b> (<code>https://vk.com/…</code>).</li>
+      <li>В админке → вкладка <b>«Каталог»</b> → найдите нужную тему.</li>
+      <li>Нажмите у неё кнопку <b>🆕</b>.</li>
+      <li>Впишите название материала (например «Презентация» или «Дополнение») и вставьте ссылку → <b>«Добавить»</b>.</li>
+      <li>Вверху <b>«💾 Сохранить на сайт»</b>.</li>
+    </ol>
+    <div class="note ok">✅ На сайте тема останется <b>одной строкой</b> с пометкой <b>📎 N</b>. При нажатии раскроется список всех материалов. Хоть 2, хоть 30 — каталог не засоряется.</div>
+    <p style="margin-top:10px;color:var(--muted);font-size:13.5px">Переименовать или удалить материал можно в редакторе темы (кнопка <b>✏️</b> → раздел «Дополнительные материалы»).</p>
+  </section>
+
+  <nav class="toc">
+    <div class="toc-title">Разделы</div>
+    <a href="#copy"><span class="e">📎</span> Как скопировать ссылку на пост в ВКонтакте</a>
+    <a href="#add"><span class="e">➕</span> Как добавить материал</a>
+    <a href="#extra"><span class="e">🆕</span> Доп-материалы к параграфу</a>
+    <a href="#edit"><span class="e">✏️</span> Изменить, удалить, поменять порядок</a>
+    <a href="#struct"><span class="e">🏫</span> Добавить класс или раздел</a>
+    <a href="#pass"><span class="e">🔒</span> Сменить логин и пароль</a>
+    <a href="#share"><span class="e">📣</span> Что отправлять ученикам</a>
+    <a href="#faq"><span class="e">❓</span> Частые вопросы</a>
+  </nav>
+
+  <!-- copy -->
+  <section class="sec" id="copy">
+    <div class="sec-head"><span class="e">📎</span><h2>Как скопировать ссылку на пост в ВКонтакте</h2></div>
+    <p>Это главное умение — именно ссылку вы вставляете на сайт.</p>
+    <ol>
+      <li>Откройте нужный пост в сообществе ВКонтакте.</li>
+      <li>Нажмите на посте <b>«⋯»</b> (три точки).</li>
+      <li>Выберите <b>«Скопировать ссылку»</b>.</li>
+    </ol>
+    <div class="note warn">⚠️ Ссылка выглядит как <code>https://vk.com/wall-…</code>. Это <b>не</b> подпись поста и <b>не</b> его текст. Если вставить текст — тема не откроется.</div>
+  </section>
+
+  <!-- add -->
+  <section class="sec" id="add">
+    <div class="sec-head"><span class="e">➕</span><h2>Как добавить материал (по шагам)</h2></div>
+
+    <p><b>Шаг 1.</b> Опубликуйте пост с материалами в сообществе ВКонтакте — как обычно.</p>
+    <div class="mock">
+      <div class="mock-input" style="display:flex;align-items:center;gap:10px;margin:0">
+        <span style="font-size:22px">🏺</span>
+        <span><b>§1. Древнейшие люди</b><br><span class="ph" style="font-size:12px">Всеобщая история. История Древнего мира. 5 класс.</span></span>
+      </div>
+    </div>
+
+    <p style="margin-top:12px"><b>Шаг 2.</b> Скопируйте <b>ссылку</b> на пост: «⋯» на посте → «Скопировать ссылку».</p>
+    <div class="note warn">⚠️ Копируйте именно ссылку — <code>https://vk.com/wall-…</code>. <b>Не</b> вставляйте название/подпись поста (текст) — так тема не откроется. Это самая частая ошибка.</div>
+
+    <p style="margin-top:12px"><b>Шаг 3.</b> В админке (вкладка «Обзор») выберите <b>класс</b> и <b>раздел</b>.</p>
+    <p><b>Шаг 4.</b> Впишите <b>название темы</b> и вставьте <b>ссылку</b> в поле «Ссылка на пост ВКонтакте».</p>
+    <div class="mock">
+      <div class="mock-input"><span class="ph">Класс:</span> 5 класс ▾</div>
+      <div class="mock-input"><span class="ph">Раздел:</span> Глава I. Первобытное общество ▾</div>
+      <div class="mock-input"><span class="ph">Название темы:</span> §1. Древнейшие люди</div>
+      <div class="mock-input hl"><span class="ph">Ссылка на пост ВКонтакте:</span> https://vk.com/wall-… ⬅ сюда вставьте ссылку</div>
+    </div>
+
+    <p style="margin-top:12px"><b>Шаг 5.</b> Нажмите <b>«Сохранить тему»</b>, затем вверху <b>«💾 Сохранить на сайт»</b>.</p>
+    <div class="note ok">✅ Готово! Через 1–2 минуты тема появится в навигаторе.</div>
+  </section>
+
+  <!-- extra -->
+  <section class="sec" id="extra">
+    <div class="sec-head"><span class="e">🆕</span><h2>Несколько материалов к одной теме</h2></div>
+    <p>Если по теме вышло несколько постов — <b>не создавайте новые темы</b>. Добавляйте их <b>внутрь</b> той же темы:</p>
+    <ol>
+      <li>Вкладка <b>«Каталог»</b> → найдите нужную тему.</li>
+      <li>В строке темы нажмите кнопку <b>🆕</b>.</li>
+      <li>Впишите название материала (например «Презентация») и вставьте ссылку → «Добавить».</li>
+    </ol>
+    <div class="mock"><span class="btns">↑ ↓ &nbsp; 🆕 &nbsp; ✏️ &nbsp; 🗑️</span> &nbsp;— кнопки у каждой темы в «Каталоге»</div>
+    <div class="note ok">✅ На сайте тема останется <b>одной строкой</b>, а при нажатии раскроется <b>список всех материалов</b>. Хоть 2, хоть 30 — каталог не засоряется.</div>
+    <p style="margin-top:10px">Управлять всеми материалами темы (переименовать, удалить) можно в редакторе темы — кнопка <b>✏️</b>, раздел «Дополнительные материалы».</p>
+  </section>
+
+  <!-- edit -->
+  <section class="sec" id="edit">
+    <div class="sec-head"><span class="e">✏️</span><h2>Изменить, удалить, поменять порядок</h2></div>
+    <p>Всё это — во вкладке <b>«Каталог»</b>. У каждой темы справа кнопки:</p>
+    <ul>
+      <li><b>✏️</b> — изменить название или ссылку;</li>
+      <li><b>🗑️</b> — удалить лишнюю тему;</li>
+      <li><b>↑ ↓</b> — поднять или опустить в списке.</li>
+    </ul>
+    <div class="note info">После любых изменений жмите вверху <b>«💾 Сохранить на сайт»</b>.</div>
+  </section>
+
+  <!-- struct -->
+  <section class="sec" id="struct">
+    <div class="sec-head"><span class="e">🏫</span><h2>Добавить класс или раздел</h2></div>
+    <p>Обычно всё уже создано (5–11 классы со всеми главами). Но если нужно:</p>
+    <ul>
+      <li><b>Новый раздел (главу):</b> вкладка «Обзор» → кнопка <b>«+ Новый раздел»</b>.</li>
+      <li><b>Новый класс:</b> вкладка «Обзор» → кнопка <b>«+ Новый класс»</b>.</li>
+    </ul>
+  </section>
+
+  <!-- pass -->
+  <section class="sec" id="pass">
+    <div class="sec-head"><span class="e">🔒</span><h2>Сменить логин и пароль</h2></div>
+    <ol>
+      <li>Вкладка <b>«⚙️ Настройки»</b> → раздел <b>«Вход администратора»</b>.</li>
+      <li>Впишите новый логин и/или новый пароль.</li>
+      <li>Нажмите <b>«Сохранить логин и пароль»</b>, затем вверху <b>«💾 Сохранить на сайт»</b>.</li>
+    </ol>
+  </section>
+
+  <!-- share -->
+  <section class="sec" id="share">
+    <div class="sec-head"><span class="e">📣</span><h2>Что отправлять ученикам</h2></div>
+    <p>Ученикам даёте <b>ссылку на сайт-навигатор</b> — её можно закрепить в сообществе:</p>
+    <div class="mock"><code>https://ruslan709.github.io/history/</code></div>
+    <div class="note info">Материалы доступны подписчикам сообщества. На сайте есть кнопка «Вступить в сообщество» — человек подписывается в один тап и открывает темы.</div>
+  </section>
+
+  <!-- faq -->
+  <section class="sec" id="faq">
+    <div class="sec-head"><span class="e">❓</span><h2>Частые вопросы</h2></div>
+    <div class="qa"><b>Добавил, но на сайте не появилось.</b>Подождите 1–2 минуты и обновите страницу. На компьютере — Ctrl+Shift+R, на телефоне — закройте и откройте вкладку заново.</div>
+    <div class="qa"><b>Тема есть, но по ней «нет доступа».</b>Значит человек не подписан на сообщество. Материалы для подписчиков — нужно вступить в сообщество (кнопка есть на сайте).</div>
+    <div class="qa"><b>Нажал тему — не открывается / пусто.</b>Проверьте, что в теме вставлена <b>ссылка</b> (<code>https://vk.com/…</code>), а не текст/подпись поста.</div>
+    <div class="qa"><b>Появилась лишняя (дублирующая) тема.</b>Вкладка «Каталог» → у лишней темы нажмите 🗑️ → «Сохранить на сайт».</div>
+    <div class="qa"><b>Забыл пароль.</b>Напишите разработчику — восстановим.</div>
+  </section>
+
+  <div class="foot">
+    Материалы лежат в сообществе ВКонтакте. Сайт — удобное содержание, которое к ним ведёт.<br>
+    © История на пальцах
+  </div>
+
+</div>
+</body>
+</html>
