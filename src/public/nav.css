@@ -359,23 +359,41 @@
   background:linear-gradient(120deg, var(--gold-light), var(--gold));
   padding:1px 8px; border-radius:999px; white-space:nowrap;
 }
-.support-card .sc-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+.support-card .sc-actions{ display:flex; gap:14px; flex-wrap:wrap; }
 .support-card .sc-btn{
-  display:inline-block; text-align:center; white-space:nowrap;
-  font-weight:800; font-size:15px; padding:13px 22px; border-radius:999px;
-  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  position:relative; overflow:hidden;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  text-align:center; white-space:nowrap;
+  font-weight:900; font-size:15.5px; letter-spacing:.2px;
+  padding:15px 30px; border-radius:999px; border:none; cursor:pointer;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s ease, filter .22s ease;
 }
-.support-card .sc-btn:hover{ transform:translateY(-2px); }
+.support-card .sc-btn:active{ transform:translateY(0) scale(.98); }
+/* Донат — тёплый бордовый градиент */
 .support-card .sc-donate{
-  background:var(--paper-2); color:var(--burgundy); border:1.5px solid rgba(124,37,64,0.35);
+  color:#fff;
+  background:linear-gradient(125deg, #9a3153 0%, var(--burgundy) 55%, #5e1730 120%);
+  box-shadow:0 10px 24px rgba(124,37,64,0.38);
 }
-.support-card .sc-donate:hover{ box-shadow:var(--shadow-sm); filter:brightness(1.02); }
+.support-card .sc-donate:hover{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(124,37,64,0.50); filter:brightness(1.06); }
+/* Подписка — золотая, главная кнопка */
 .support-card .sc-btn.sc-subscribe{
-  background:linear-gradient(120deg, var(--gold), var(--gold-light));
-  color:#3a2c10; box-shadow:0 8px 20px rgba(201,161,90,0.40);
+  color:#3a2c10;
+  background:linear-gradient(125deg, var(--gold-light) 0%, var(--gold) 55%, #b5852f 120%);
+  box-shadow:0 10px 26px rgba(201,161,90,0.50), inset 0 1px 0 rgba(255,255,255,0.4);
 }
-.support-card .sc-btn.sc-subscribe:hover{ box-shadow:0 12px 26px rgba(201,161,90,0.5); }
+.support-card .sc-btn.sc-subscribe:hover{ transform:translateY(-3px); box-shadow:0 16px 38px rgba(201,161,90,0.62), inset 0 1px 0 rgba(255,255,255,0.5); filter:brightness(1.04); }
+/* Блик, пробегающий по кнопкам */
+.support-card .sc-btn::after{
+  content:''; position:absolute; top:0; left:-130%; width:55%; height:100%;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform:skewX(-20deg); pointer-events:none;
+  animation: scSheen 3.8s ease-in-out infinite;
+}
+.support-card .sc-subscribe::after{ animation-delay:.7s; }
+@keyframes scSheen{ 0%{ left:-130%; } 55%,100%{ left:135%; } }
+@media (prefers-reduced-motion: reduce){ .support-card .sc-btn::after{ display:none; } }
 @media (max-width:560px){
   .support-card .sc-actions{ width:100%; }
-  .support-card .sc-btn{ flex:1; }
+  .support-card .sc-btn{ flex:1; padding:15px 18px; }
 }
