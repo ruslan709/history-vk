@@ -1,8 +1,10 @@
 import type { Content, Grade, Material, Section, Topic } from '../types'
 import { uid } from '../utils'
 
-export function newTopic(title = '', icon = '📖', url = ''): Topic {
-  return { id: uid('t'), title, icon, url }
+export function newTopic(title = '', icon = '📖', url = '', paid = false): Topic {
+  const t: Topic = { id: uid('t'), title, icon, url }
+  if (paid) t.paid = true
+  return t
 }
 export function newMaterial(label = '', url = ''): Material {
   return { id: uid('m'), label, url }

@@ -46,6 +46,11 @@ function Illustration() {
 // Сообщество ВКонтакте проекта «История на пальцах»
 const CHANNEL_INVITE = 'https://vk.ru/club239810453'
 
+// ⚠️ Ссылки на донат и подписку. Пока ведут в сообщество —
+// замени на ссылку VK Donut (вида https://vk.ru/donut/club239810453), когда включишь донаты.
+const SUPPORT_URL = CHANNEL_INVITE     // «Поддержать» — донат по желанию
+const SUBSCRIBE_URL = CHANNEL_INVITE   // «Оформить подписку» — VK Donut
+
 // Логотип канала: пробуем logo.png → logo.webp → logo.jpg, иначе рисованная эмблема.
 const LOGO_CANDIDATES = ['logo.png', 'logo.webp', 'logo.jpg']
 function BrandEmblem() {
@@ -251,6 +256,7 @@ export default function Nav() {
     const titleBlock = (
       <div className="lesson-title">
         {highlight(t.title, q)}
+        {t.paid && <span className="lesson-paid">🔒 по подписке</span>}
         {subLabel && <span className="lesson-sub">{subLabel}</span>}
       </div>
     )
@@ -382,6 +388,19 @@ export default function Nav() {
         </span>
         <span className="jc-btn">Вступить в сообщество →</span>
       </a>
+
+      <div className="support-card">
+        <div className="sc-body">
+          <div className="sc-title">💛 Поддержите проект</div>
+          <div className="sc-sub">
+            База — <b>бесплатно</b>. Расширенные материалы (помечены <span className="sc-lock">🔒 по подписке</span>) — по подписке.
+          </div>
+        </div>
+        <div className="sc-actions">
+          <a className="sc-btn sc-donate" href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">💛 Поддержать</a>
+          <a className="sc-btn sc-subscribe" href={SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">⭐ Оформить подписку</a>
+        </div>
+      </div>
 
       <div className="layout">
         <aside className="sidebar">

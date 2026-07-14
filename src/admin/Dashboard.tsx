@@ -14,6 +14,7 @@ export default function Dashboard({ content, applyEdit, notify }: EditorProps) {
   const [title, setTitle] = useState('')
   const [icon, setIcon] = useState('📖')
   const [url, setUrl] = useState('')
+  const [paid, setPaid] = useState(false)
 
   const [showGrade, setShowGrade] = useState(false)
   const [showSection, setShowSection] = useState(false)
@@ -29,11 +30,12 @@ export default function Dashboard({ content, applyEdit, notify }: EditorProps) {
     if (!effectiveSectionId) return notify('Сначала добавьте раздел в этот класс', 'err')
     applyEdit((c) => {
       const s = findSection(c, gradeId, effectiveSectionId)
-      s?.topics.push(newTopic(title.trim(), icon, url.trim()))
+      s?.topics.push(newTopic(title.trim(), icon, url.trim(), paid))
     })
     notify('Тема добавлена ✓ Не забудьте «Сохранить на сайт»', 'ok')
     setTitle('')
     setUrl('')
+    setPaid(false)
   }
 
   const [showHelp, setShowHelp] = useState(true)
@@ -113,6 +115,14 @@ export default function Dashboard({ content, applyEdit, notify }: EditorProps) {
             <label>Ссылка на пост ВКонтакте</label>
             <input className="input" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://vk.com/…" />
             <span className="hint">Можно оставить пустой — тогда тема покажется с пометкой «скоро».</span>
+          </div>
+
+          <div className="field">
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+              <input type="checkbox" checked={paid} onChange={(e) => setPaid(e.target.checked)} style={{ width: 18, height: 18 }} />
+              🔒 Материал по подписке (платный)
+            </label>
+            <span className="hint">Отметьте, если тема доступна только по платной подписке. На сайте появится метка «🔒 по подписке».</span>
           </div>
 
           <div className="actions-row">

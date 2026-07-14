@@ -13,6 +13,7 @@ export interface Topic {
   title: string
   url: string // основная ссылка на пост в ВКонтакте (может быть пустой)
   extras?: Material[] // дополнительные материалы к этой же теме
+  paid?: boolean // материал по платной подписке (VK Donut). Пусто/false = бесплатно
 }
 
 export interface Section {

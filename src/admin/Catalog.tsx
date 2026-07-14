@@ -81,6 +81,7 @@ export default function Catalog({ content, applyEdit, notify }: EditorProps) {
                           <div className="t-icon">{t.icon}</div>
                           <div className="t-title">
                             {t.title}
+                            {t.paid && <span style={{ marginLeft: 6, fontSize: 11, fontWeight: 700, color: '#b8860b' }}>🔒 подписка</span>}
                             <span className="t-url" style={{ color: matCount(t) ? '#2e7d32' : 'var(--text-muted)' }}>
                               {matCount(t) ? `🔗 материалов: ${matCount(t)}` : 'без ссылки'}
                             </span>
@@ -110,11 +111,11 @@ export default function Catalog({ content, applyEdit, notify }: EditorProps) {
         <TopicModal
           initial={editTopic.topic}
           onClose={() => setEditTopic(null)}
-          onSave={(title, icon, url, extras) => {
+          onSave={(title, icon, url, extras, paid) => {
             applyEdit((c) => {
               const s = findSection(c, editTopic.gradeId, editTopic.sectionId)
               const t = s?.topics.find((x) => x.id === editTopic.topic.id)
-              if (t) { t.title = title; t.icon = icon; t.url = url; t.extras = extras }
+              if (t) { t.title = title; t.icon = icon; t.url = url; t.extras = extras; if (paid) t.paid = true; else delete t.paid }
             })
             notify('Тема обновлена ✓', 'ok')
             setEditTopic(null)
@@ -146,10 +147,10 @@ export default function Catalog({ content, applyEdit, notify }: EditorProps) {
           initial={newTopic()}
           title="Новая тема"
           onClose={() => setAddTopicTo(null)}
-          onSave={(title, icon, url, extras) => {
+          onSave={(title, icon, url, extras, paid) => {
             applyEdit((c) => {
               const s = findSection(c, addTopicTo.gradeId, addTopicTo.section.id)
-              const nt = newTopic(title, icon, url)
+              const nt = newTopic(title, icon, url, paid)
               if (extras.length) nt.extras = extras
               s?.topics.push(nt)
             })
@@ -193,12 +194,13 @@ export default function Catalog({ content, applyEdit, notify }: EditorProps) {
 }
 
 function TopicModal({ initial, title = 'Редактировать тему', onClose, onSave }: {
-  initial: Topic; title?: string; onClose: () => void; onSave: (title: string, icon: string, url: string, extras: Material[]) => void
+  initial: Topic; title?: string; onClose: () => void; onSave: (title: string, icon: string, url: string, extras: Material[], paid: boolean) => void
 }) {
   const [t, setT] = useState(initial.title)
   const [icon, setIcon] = useState(initial.icon)
   const [url, setUrl] = useState(initial.url)
   const [extras, setExtras] = useState<Material[]>((initial.extras ?? []).map((e) => ({ ...e })))
+  const [paid, setPaid] = useState(!!initial.paid)
 
   function addExtra() { setExtras((x) => [...x, newMaterial(`Дополнение ${x.length + 1}`, '')]) }
   function upExtra(id: string, patch: Partial<Material>) { setExtras((x) => x.map((e) => (e.id === id ? { ...e, ...patch } : e))) }
@@ -229,9 +231,17 @@ function TopicModal({ initial, title = 'Редактировать тему', on
         <button type="button" className="btn btn-ghost btn-sm" style={{ marginTop: 10 }} onClick={addExtra}>+ Добавить материал</button>
       </div>
 
+      <div className="field">
+        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+          <input type="checkbox" checked={paid} onChange={(e) => setPaid(e.target.checked)} style={{ width: 18, height: 18 }} />
+          🔒 Материал по подписке (платный)
+        </label>
+        <span className="hint">На сайте у темы появится метка «🔒 по подписке». Бесплатные темы оставьте без галочки.</span>
+      </div>
+
       <div className="modal-actions">
         <button className="btn btn-ghost" onClick={onClose}>Отмена</button>
-        <button className="btn btn-primary" onClick={() => t.trim() && onSave(t.trim(), icon, url.trim(), extras.map((e) => ({ ...e, label: e.label.trim(), url: e.url.trim() })).filter((e) => e.url))}>Сохранить</button>
+        <button className="btn btn-primary" onClick={() => t.trim() && onSave(t.trim(), icon, url.trim(), extras.map((e) => ({ ...e, label: e.label.trim(), url: e.url.trim() })).filter((e) => e.url), paid)}>Сохранить</button>
       </div>
     </Modal>
   )

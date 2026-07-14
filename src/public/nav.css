@@ -328,3 +328,54 @@
 .lm-item:hover{ transform:translateX(3px); box-shadow:var(--shadow-sm); background:var(--card); border-color:rgba(201,161,90,0.5); border-style:solid; }
 .lm-dot{ font-size:16px; flex-shrink:0; }
 .lm-item-label{ flex:1; min-width:0; font-size:14px; font-weight:600; color:var(--text); }
+
+/* ===== Метка «по подписке» у платной темы ===== */
+.lesson-paid{
+  display:inline-block; margin-left:8px; vertical-align:middle;
+  font-size:11px; font-weight:800; letter-spacing:.2px; white-space:nowrap;
+  color:#6c4e0c;
+  background:linear-gradient(120deg, var(--gold-light), var(--gold));
+  padding:2px 9px; border-radius:999px;
+  box-shadow:0 2px 6px rgba(201,161,90,0.35);
+}
+
+/* ===== Карточка «Поддержите проект» (донат + подписка) ===== */
+.support-card{
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  margin:22px 0;
+  padding:20px 24px;
+  border-radius:22px;
+  background:
+    radial-gradient(500px 160px at 12% 0%, rgba(201,161,90,0.16), transparent 70%),
+    var(--card);
+  border:1px solid rgba(201,161,90,0.45);
+  box-shadow:var(--shadow-md);
+}
+.support-card .sc-body{ flex:1; min-width:220px; }
+.support-card .sc-title{ font-family:'PT Serif',serif; font-weight:700; font-size:19px; color:var(--text); }
+.support-card .sc-sub{ margin-top:5px; font-size:14px; line-height:1.5; color:var(--text-muted); }
+.support-card .sc-lock{
+  display:inline-block; font-size:11.5px; font-weight:800; color:#6c4e0c;
+  background:linear-gradient(120deg, var(--gold-light), var(--gold));
+  padding:1px 8px; border-radius:999px; white-space:nowrap;
+}
+.support-card .sc-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+.support-card .sc-btn{
+  display:inline-block; text-align:center; white-space:nowrap;
+  font-weight:800; font-size:15px; padding:13px 22px; border-radius:999px;
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.support-card .sc-btn:hover{ transform:translateY(-2px); }
+.support-card .sc-donate{
+  background:var(--paper-2); color:var(--burgundy); border:1.5px solid rgba(124,37,64,0.35);
+}
+.support-card .sc-donate:hover{ box-shadow:var(--shadow-sm); filter:brightness(1.02); }
+.support-card .sc-btn.sc-subscribe{
+  background:linear-gradient(120deg, var(--gold), var(--gold-light));
+  color:#3a2c10; box-shadow:0 8px 20px rgba(201,161,90,0.40);
+}
+.support-card .sc-btn.sc-subscribe:hover{ box-shadow:0 12px 26px rgba(201,161,90,0.5); }
+@media (max-width:560px){
+  .support-card .sc-actions{ width:100%; }
+  .support-card .sc-btn{ flex:1; }
+}
