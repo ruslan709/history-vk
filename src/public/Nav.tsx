@@ -51,9 +51,8 @@ const CHANNEL_INVITE = 'https://vk.ru/club239810453'
 const SUPPORT_URL = CHANNEL_INVITE     // «Поддержать» — донат по желанию
 const SUBSCRIBE_URL = CHANNEL_INVITE   // «Оформить подписку» — VK Donut
 
-// ⚠️ Ссылка на КАНАЛ ВК (не путать с сообществом). Заказчик пришлёт — заменить.
-// Пока ведёт в сообщество как заглушка.
-const CHANNEL_LINK = CHANNEL_INVITE
+// Ссылка на КАНАЛ ВК (в мессенджере) — для анонсов.
+const CHANNEL_LINK = 'https://vk.ru/im/channels/-240230569'
 
 // Логотип канала: пробуем logo.png → logo.webp → logo.jpg, иначе рисованная эмблема.
 const LOGO_CANDIDATES = ['logo.png', 'logo.webp', 'logo.jpg']
