@@ -48,8 +48,9 @@ const CHANNEL_INVITE = 'https://vk.ru/club239810453'
 
 // ⚠️ Ссылки на донат и подписку. Пока ведут в сообщество —
 // замени на ссылку VK Donut (вида https://vk.ru/donut/club239810453), когда включишь донаты.
-// Страница оплаты VK Donut (подписка на материалы)
-const DONUT_URL = 'https://vk.ru/club239810453?w=donut_payment-239810453&levelId=3408'
+// Страница оплаты VK Donut. Пусто = блок доната/подписки скрыт (ссылка ещё не готова).
+// Как появится рабочая ссылка — вставь её сюда, и блок с кнопками вернётся автоматически.
+const DONUT_URL = ''
 const SUPPORT_URL = DONUT_URL     // «Поддержать» → VK Donut
 const SUBSCRIBE_URL = DONUT_URL   // «Оформить подписку» → VK Donut
 
@@ -415,18 +416,20 @@ export default function Nav() {
         <span className="jc-btn">Вступить в сообщество →</span>
       </a>
 
-      <div className="support-card">
-        <div className="sc-body">
-          <div className="sc-title">💛 Поддержите проект</div>
-          <div className="sc-sub">
-            База — <b>бесплатно</b>. Расширенные материалы (помечены <span className="sc-lock">🔒 по подписке</span>) — по подписке.
+      {DONUT_URL && (
+        <div className="support-card">
+          <div className="sc-body">
+            <div className="sc-title">💛 Поддержите проект</div>
+            <div className="sc-sub">
+              База — <b>бесплатно</b>. Расширенные материалы (помечены <span className="sc-lock">🔒 по подписке</span>) — по подписке.
+            </div>
+          </div>
+          <div className="sc-actions">
+            <a className="sc-btn sc-donate" href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">💛 Поддержать</a>
+            <a className="sc-btn sc-subscribe" href={SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">⭐ Оформить подписку</a>
           </div>
         </div>
-        <div className="sc-actions">
-          <a className="sc-btn sc-donate" href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">💛 Поддержать</a>
-          <a className="sc-btn sc-subscribe" href={SUBSCRIBE_URL} target="_blank" rel="noopener noreferrer">⭐ Оформить подписку</a>
-        </div>
-      </div>
+      )}
 
       <div className="layout">
         <aside className="sidebar">
