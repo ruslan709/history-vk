@@ -51,6 +51,10 @@ const CHANNEL_INVITE = 'https://vk.ru/club239810453'
 const SUPPORT_URL = CHANNEL_INVITE     // «Поддержать» — донат по желанию
 const SUBSCRIBE_URL = CHANNEL_INVITE   // «Оформить подписку» — VK Donut
 
+// ⚠️ Ссылка на КАНАЛ ВК (не путать с сообществом). Заказчик пришлёт — заменить.
+// Пока ведёт в сообщество как заглушка.
+const CHANNEL_LINK = CHANNEL_INVITE
+
 // Логотип канала: пробуем logo.png → logo.webp → logo.jpg, иначе рисованная эмблема.
 const LOGO_CANDIDATES = ['logo.png', 'logo.webp', 'logo.jpg']
 function BrandEmblem() {
@@ -404,6 +408,15 @@ export default function Nav() {
 
       <div className="layout">
         <aside className="sidebar">
+          <a className="channel-cta" href={CHANNEL_LINK} target="_blank" rel="noopener noreferrer">
+            <span className="cc-icon">📢</span>
+            <span className="cc-text">
+              <span className="cc-title">Перейти в канал</span>
+              <span className="cc-sub">Анонсы новых материалов</span>
+            </span>
+            <span className="cc-arrow">→</span>
+          </a>
+          <div className="channel-hint">Выберите класс → главу → тему — материал откроется в ВК</div>
           <div className="sidebar-title">🎓 Классы</div>
           <div className="class-list">
             {content.grades.map((g) => (
