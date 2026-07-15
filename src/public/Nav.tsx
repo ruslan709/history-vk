@@ -184,10 +184,13 @@ export default function Nav() {
     loadPublic()
       .then((c) => {
         setContent(c)
+        // Прямая ссылка на класс: …/history-vk/#5, #6 … #11 (для плиток ВК-меню).
+        // Из хэша берём только цифры: «#5» → «5», «#grade=11» → «11».
+        const hashGrade = window.location.hash.replace(/[^0-9]/g, '')
         // Восстанавливаем последний выбранный класс и открытую главу
         const savedGrade = localStorage.getItem('istoriya_vk_nav_grade')
         const savedSection = localStorage.getItem('istoriya_vk_nav_section')
-        const g = c.grades.find((x) => x.id === savedGrade) ?? c.grades[0]
+        const g = c.grades.find((x) => x.id === hashGrade) ?? c.grades.find((x) => x.id === savedGrade) ?? c.grades[0]
         if (g) {
           setGradeId(g.id)
           const sec = g.sections.find((s) => s.id === savedSection) ?? g.sections[0]
@@ -210,6 +213,24 @@ export default function Nav() {
       })
       .catch((e) => setError(String(e.message || e)))
   }, [])
+
+  // Плитки ВК-меню могут вести на #5…#11 при уже открытой странице — реагируем на смену хэша
+  useEffect(() => {
+    function onHash() {
+      const hg = window.location.hash.replace(/[^0-9]/g, '')
+      const g = content?.grades.find((x) => x.id === hg)
+      if (!g) return
+      const first = g.sections[0]?.id ?? ''
+      setGradeId(g.id)
+      setOpenSection(first)
+      setQuery('')
+      localStorage.setItem('istoriya_vk_nav_grade', g.id)
+      localStorage.setItem('istoriya_vk_nav_section', first)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [content])
 
   const stats = useMemo(() => (content ? computeStats(content) : null), [content])
   const grade: Grade | undefined = content?.grades.find((g) => g.id === gradeId)
