@@ -48,8 +48,10 @@ const CHANNEL_INVITE = 'https://vk.ru/club239810453'
 
 // ⚠️ Ссылки на донат и подписку. Пока ведут в сообщество —
 // замени на ссылку VK Donut (вида https://vk.ru/donut/club239810453), когда включишь донаты.
-const SUPPORT_URL = CHANNEL_INVITE     // «Поддержать» — донат по желанию
-const SUBSCRIBE_URL = CHANNEL_INVITE   // «Оформить подписку» — VK Donut
+// Страница оплаты VK Donut (подписка на материалы)
+const DONUT_URL = 'https://vk.ru/club239810453?w=donut_payment-239810453&levelId=3408'
+const SUPPORT_URL = DONUT_URL     // «Поддержать» → VK Donut
+const SUBSCRIBE_URL = DONUT_URL   // «Оформить подписку» → VK Donut
 
 // Ссылка на КАНАЛ ВК (в мессенджере) — для анонсов.
 const CHANNEL_LINK = 'https://vk.ru/im/channels/-240230569'
